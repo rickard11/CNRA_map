@@ -15,7 +15,6 @@ library(leaflet)
 
 ```{r, printmap}
 well_location<- read.csv("data/CNRA_well_location.csv")
-head(well_location)
 
 CNRA_Calgro_map<-leaflet(well_location) %>%
   addTiles() %>%
