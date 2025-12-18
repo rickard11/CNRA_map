@@ -1,0 +1,28 @@
+---
+title: "dashboard"
+editor: visual
+format: dashboard
+---
+
+
+```{r, loadpackages}
+#|echo: false
+#|include: false
+# 3. Create list of file paths for popupss
+library(tidyverse)
+library(leaflet)
+```
+
+```{r, printmap}
+well_location<- read.csv("data/CNRA_well_location.csv")
+head(well_location)
+
+CNRA_Calgro_map<-leaflet(well_location) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.WorldImagery") %>%   # 🌍 Aerial imagery basemap
+  setView(lng = -118.63, lat = 37.6, zoom = 6) %>%
+  addCircleMarkers(
+    ~LONGITUDE, ~LATITUDE,
+    radius = 1.5)
+CNRA_Calgro_map
+```
