@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>dashboard – CNRA_map</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="site_libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="site_libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="site_libs/quarto-dashboard/components.js"></script>
+
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+<script src="site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
+
+
+</head>
+
+<body class="quarto-dashboard nav-fixed dashboard-fill fullcontent quarto-light">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CNRA_map</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./dashboard.html" aria-current="page"> 
+<span class="menu-text">dashboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">Dashboard</span>
+    </span>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">dashboard</a></div>
+        
+        
+      </div>
+    </div>
+</div>
+</nav>
+</header></header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-layout-custom page-navbar quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+<!-- main -->
+
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="leaflet html-widget html-fill-item html-fill-container" id="htmlwidget-fa17de1db472fbbbb6e8" style="width:100%;height:406px;"></div>
+<script type="application/json" data-for="htmlwidget-fa17de1db472fbbbb6e8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[37.88605556,37.88486111,37.88602778,37.88502778,37.81855556,37.82041667,37.81855556,37.82033333,37.81083333,37.81030556,37.8105,37.80969444,37.86251731,37.86251189,37.85137325,37.85122454,37.81110136,37.81260856,37.81306824,38.120444444,38.21975,38.232889,38.20441667,38.20441667,38.2108889,38.2108889,38.20469444,38.20469444,38.14825,38.14825,38.20625,38.29020604,38.29019763,38.27965087,38.27964821,38.27280057,38.27280145,38.28453651,38.28453651,38.28471043,38.28473692,38.27892112,38.27893819,38.27417177,38.27417072,38.2711299,38.27267165,38.2726972,38.27028472,38.27031076,38.27032465,38.26652,38.2665424,38.26656228,38.26574339,38.26574339,38.26230448,38.26230426,38.25305822,38.25307107,38.25323585,38.25325886,38.241083,38.241083,38.25925,38.260361,38.2511944,38.2511944,33.68512485,38.4159,38.4159,38.4159,38.646422,38.646422,38.646422,38.64643,38.606329,38.606329,38.665,38.73330602,38.73330014,38.73204742,38.73203943,38.73219789,38.73221058,38.71834519,38.71835409,38.7201817,38.72017619,38.71716281,38.71716861,38.706127042,38.706135543,38.7013656,38.711088235,38.711078597,38.707251549,38.707248995,38.683714662,38.683720156,38.683826475,38.683826453,38.6869,38.6869,38.6869,38.6783,38.6783,38.6783,38.6783,38.6895,38.8362,38.8362,38.8362,38.779387,38.779387,38.779387,38.779387,38.779435,38.779435,38.779435,38.779435,38.836091,38.829343,38.82323563,38.82323563,38.82323563,38.82323563,38.76279371,38.76280858,38.76297651,38.76298264,38.76265983,38.76266402,38.74854334,38.74853201,38.74853186,38.74854175,38.74886151,38.74886761,38.750678255,38.823611,38.823611,38.823611,38.823611,38.8965,38.8965,38.8965,38.8813,38.8813,38.8813,38.916277,38.916277,38.916277,38.88471,38.88471,38.88471,38.869027,38.869027,38.869027,38.876059,38.876059,38.876059,38.876059,38.83684,38.9116,38.9116,38.9116,38.9116,38.8594,38.8594,38.8594,38.968914,38.96688,38.96688,38.9605,38.9605,38.9605,38.969348,38.969348,38.969348,39.00864169,39.00864169,39.00864169,38.945159,38.945159,38.945159,38.945159,38.9883,38.9857,38.9857,38.9857,38.9857,38.970937,38.970938,38.970936,38.970936,39.000036,39.000036,38.99392,38.99392,38.981237,38.9722,38.9722,39.0047,39.0047,39.012435,39.012435,39.012435,39.012435,39.06955,39.06955,39.06955,39.06955,39.0244,39.0244,39.0244,39.05398,39.05398,39.05398,39.05398,39.045823,39.045823,39.045823,39.045823,39.048,36.73529305,36.73529305,36.73529305,39.132998,39.132998,39.132998,39.17588,39.17588,39.17588,39.17588,39.175737,39.275273,39.275273,39.275273,39.275247,39.239358,39.239358,39.239358,39.239358,39.239358,39.1975,39.241473,39.241473,39.241473,39.241473,39.3257,39.32572,39.32572,39.31695,39.31695,39.31695,39.316922,39.343775,39.343775,39.343775,39.343775,41.852247,39.300987,39.300987,39.300987,39.2968077,39.2968077,39.2968077,39.341681,39.341681,39.341681,39.341631,39.304207,39.304387,39.304387,39.304387,39.39723,39.367445,39.4419,39.4419,39.4419,39.420773,39.420773,39.420773,39.420773,39.4051218,39.4051218,39.4051218,36.37232,36.37232,36.37232,39.463547,39.463439,39.463439,39.49270183,39.49270183,39.49270183,39.49270183,39.457237,39.511803,39.511803,39.511803,39.494417,39.494409,39.494409,39.5157,39.5157,39.5157,39.455965,39.502267,36.25434,36.25434,36.25434,39.615756,39.583073,39.577074,39.577063,39.577063,39.615453,39.589093,39.589151,39.58305,39.581199,39.581199,39.581199,39.608717,39.608717,39.608717,39.585509,39.585509,39.585509,39.585509,39.55949358,39.559495,39.559495,39.559495,39.549598,39.54458,39.543565,39.604892,39.604892,39.604892,39.604892,36.21492,36.21492,36.21492,36.21492,36.17377,36.17377,36.17377,39.6891,39.6734804,39.6734804,39.6734804,39.652738,39.648986,39.709957,39.69433298,39.69433298,39.69433298,39.665515,39.682255,39.6301,39.681959,39.681959,39.681959,39.646778,39.646778,39.646778,39.646778,39.642219,39.704336,39.704336,39.704328,39.704328,39.703325,39.703325,39.703325,39.703325,39.700787,39.700787,39.700787,39.700787,39.700787,39.6423,39.629906,39.629906,39.629906,39.635511,39.635511,39.639578,39.6963,39.696348,39.66763156,39.667156,39.667156,39.667156,39.667503,39.66697,39.624656,39.624656,39.624656,39.624656,39.624339,39.624339,39.624339,39.697104,39.697104,39.697092,39.697092,36.1307,36.1307,36.1307,39.731678,39.731678,39.731678,39.718967,39.718223,39.787113,39.747504,39.72627,39.72627,39.72627,39.72627,39.738267,39.783564,39.783564,39.783564,39.783564,39.787447,39.763431,39.763459,39.763459,39.763459,39.76820217,39.76820217,39.76820217,39.768197,39.73245,39.73245,39.73245,39.725267,39.78662,39.78662,39.78662,39.747339,39.747339,39.747339,39.727914,39.727914,39.727914,39.727914,39.797404778,39.797404778,39.797404778,39.797404778,39.726584,39.77772277,39.77772277,39.77772277,39.77772277,39.77772277,36.04853,36.04853,39.861936,39.818773,39.818773,39.818773,39.818773,39.802772,39.802772,39.802772,39.802772,39.811489,39.811489,39.811486,39.811486,39.8543,39.8543,39.8543,39.8543,39.8543,39.81925,39.81925,39.81925,39.81925,35.929895,35.929895,39.962981,39.962467,39.96552,39.963509,39.963278,39.963278,39.961492,39.956729,39.956729,39.95675,39.962048,39.961965,39.961965,39.958006,39.958006,39.970291,39.945556,39.945556,39.925145,39.925145,39.925145,39.90775,39.90775,39.90775,39.90775,39.899609,39.899609,39.94085,39.94085,39.94085,39.94085,39.903046,39.903046,39.903046,39.95219001,39.95219,39.95219,39.95219,39.9286,39.9286,39.973278,39.973278,39.973278,39.973967,39.973967,40.042815,40.042815,40.042815,40.016371196,40.016371196,40.016371196,40.016371196,39.980439,39.978946,39.977934,39.979637,39.977363,39.97544,39.974172,39.976526,39.977357,39.976538,40.1076,40.09211014,40.09211014,40.09211014,40.09211014,40.0937,40.0938,40.08043,40.187439,40.187439,40.187439,40.187439,40.187439,40.170859,40.170859,35.549043,35.549043,40.36722,40.392931,40.392931,40.392931,40.392931,40.392931,40.358539,40.358539,40.358539,40.358539,40.461329,40.461331,40.419478,40.40599656,40.4707,40.4707,40.47052,40.470478,40.441159,40.441123,40.44123583,40.43773944,40.43775711,40.43101428,40.43105944,40.5223917,40.5223931,40.5223923,40.5223936,40.5074,40.5073,40.68989,41.0805,41.121876,41.121946,41.121181,41.120554,41.24756,41.215719,41.215723,41.21694,41.217008,41.202928,41.20354,41.202991,41.202935,41.211997,41.211851,41.211838,41.210951,41.188025,41.188095,41.187786,41.188034,41.33738,41.32846,41.32732,41.32832,41.32996,41.32545,41.32747,41.33852,41.550591,41.550591,41.550591,41.550591,41.811383,41.817406,41.89439222,41.89439222,41.89439222,41.89439222,41.997039,41.997213,41.997792,41.997942,41.996289,41.997975,41.97259403,41.972031,41.969267,41.960784,41.996453,41.996253,41.996186,41.965217,41.97617,41.961436,0],[-121.48183333,-121.48216667,-121.48191667,-121.482,-121.54433333,-121.54444444,-121.54380556,-121.54361111,-121.54263889,-121.54488889,-121.54219444,-121.54277778,-121.32102875,-121.32158937,-121.32365659,-121.324648,-121.32564733,-121.3256613,-121.32579517,-121.50941666,-121.4975,-121.507028,-121.5280556,-121.5280556,-121.5020556,-121.5020556,-121.4808889,-121.4808889,-121.53608333,-121.53608333,-121.47936,-121.64733086,-121.64736277,-121.63236835,-121.63238779,-121.62985774,-121.62988366,-121.64187693,-121.64187693,-121.64425711,-121.64425299,-121.6403016,-121.64032833,-121.63988802,-121.63990616,-121.64191448,-121.64241576,-121.64239963,-121.66134915,-121.66134034,-121.66133658,-121.6429347,-121.64291408,-121.64289534,-121.64080961,-121.64080961,-121.65030442,-121.65026937,-121.65674016,-121.65671031,-121.66649661,-121.66651141,-121.489389,-121.489389,-121.466361,-121.457639,-121.47419,-121.47419,-116.25589319,-121.7303,-121.7303,-121.7303,-121.667487,-121.667487,-121.667487,-121.667384,-121.560173,-121.560173,-121.1776,-121.6338005,-121.6338001,-121.6329095,-121.6329094,-121.6298512,-121.6298509,-121.6337205,-121.6337212,-121.6349733,-121.6349744,-121.6323258,-121.6323345,-121.63866214,-121.638658592,-121.633121144,-121.629329062,-121.629320351,-121.631260455,-121.631252496,-121.643970137,-121.643970811,-121.642559513,-121.642552157,-121.5221,-121.5221,-121.5221,-121.5943,-121.5943,-121.5943,-121.5943,-121.1169,-121.8352,-121.8352,-121.8352,-121.812395,-121.812395,-121.812395,-121.812395,-121.812369,-121.812369,-121.812369,-121.812369,-121.777839,-121.778414,-121.6076354,-121.6076354,-121.6076354,-121.6076354,-121.6350118,-121.6350256,-121.6336021,-121.6336193,-121.6357555,-121.635755375,-121.6339328,-121.6334908,-121.6335054,-121.633923,-121.6348561,-121.6348567,-121.634569697,-121.543113,-121.543113,-121.543113,-121.543113,-121.9139,-121.9139,-121.9139,-121.8219,-121.8219,-121.8219,-121.987509,-121.987509,-121.987509,-121.966457,-121.966457,-121.966457,-121.752499,-121.752499,-121.752499,-121.709429,-121.709429,-121.709429,-121.709429,-121.758433,-121.5238,-121.5238,-121.5238,-121.5238,-121.4885,-121.4885,-121.4885,-121.86529,-121.843915,-121.843915,-121.8102,-121.8102,-121.8102,-121.925801,-121.925801,-121.925801,-121.6718796,-121.6718796,-121.6718796,-121.599153,-121.599153,-121.599153,-121.599153,-121.4883,-121.488,-121.488,-121.488,-121.488,-121.555638,-121.555639,-121.555638,-121.55564,-122.843542,-122.843542,-122.87843,-122.87843,-123.088911,-123.1033,-123.1033,-123.3685,-123.3685,-121.829041,-121.829041,-121.829041,-121.829041,-121.77784,-121.77784,-121.77784,-121.77784,-121.7812,-121.7812,-121.7812,-122.06067,-122.06067,-122.06067,-122.06067,-121.611448,-121.611448,-121.611448,-121.611448,-122.6855,-120.2782654,-120.2782654,-120.2782654,-122.216434,-122.216434,-122.216434,-121.524015,-121.524015,-121.524015,-121.524015,-121.524076,-122.105677,-122.105677,-122.105677,-122.105576,-121.65086,-121.65086,-121.65086,-121.65086,-121.65086,-121.594,-122.153517,-122.153517,-122.153517,-122.153517,-121.883,-121.882942,-121.882942,-121.800448,-121.800448,-121.800448,-121.800448,-121.951948,-121.951948,-121.951948,-121.951948,-124.201582,-121.952991,-121.952991,-121.952991,-121.69035624,-121.69035624,-121.69035624,-122.083787,-122.083787,-122.083787,-122.083817,-121.596904,-121.5969,-121.5969,-121.5969,-121.864922,-121.827879,-121.9433,-121.9433,-121.9433,-122.134145,-122.134145,-122.134145,-122.134145,-121.5736171,-121.5736171,-121.5736171,-119.52888,-119.52888,-119.52888,-121.827619,-121.82775,-121.82775,-121.9648084,-121.9648084,-121.9648084,-121.9648084,-122.001585,-121.787962,-121.787962,-121.787962,-121.693126,-121.693199,-121.693199,-122.112233,-122.112233,-122.112233,-122.085433,-122.283723,-119.51058,-119.51058,-119.51058,-121.822158,-121.806862,-121.908207,-121.908277,-121.908277,-121.739123,-121.730317,-121.730404,-121.754047,-121.70257,-121.70257,-121.70257,-122.045553,-122.045553,-122.045553,-122.116998,-122.116998,-122.116998,-122.116998,-122.0326337,-122.032609,-122.032609,-122.032609,-122.08387,-121.687321,-121.646642,-122.249484,-122.249484,-122.249484,-122.249484,-119.65521,-119.65521,-119.65521,-119.65521,-119.47984,-119.47984,-119.47984,-121.8854,-121.8144029,-121.8144029,-121.8144029,-121.852487,-121.872517,-122.008121,-121.94095952,-121.94095952,-121.94095952,-121.925035,-122.011685,-121.9407,-121.796978,-121.796978,-121.796978,-121.726248,-121.726248,-121.726248,-121.726248,-121.799417,-122.038614,-122.038614,-122.038559,-122.038559,-122.091003,-122.091003,-122.091003,-122.091003,-122.120764,-122.120764,-122.120764,-122.120764,-122.120764,-122.0366,-122.100662,-122.100662,-122.100662,-122.033062,-122.033062,-121.663376,-122.1406,-122.140542,-122.1697472,-122.177342,-122.177342,-122.177342,-122.176598,-122.176876,-122.234998,-122.234998,-122.234998,-122.234998,-122.187178,-122.187178,-122.187178,-122.253457,-122.253457,-122.253305,-122.253305,-119.31281,-119.31281,-119.31281,-121.864995,-121.864995,-121.864995,-121.898284,-121.843211,-122.010001,-122.022112,-122.010524,-122.010524,-122.010524,-122.010524,-121.798145,-122.046138,-122.046138,-122.046138,-122.046138,-122.049408,-122.077156,-122.077139,-122.077139,-122.077139,-122.1364444,-122.1364444,-122.1364444,-122.13642,-122.123331,-122.123331,-122.123331,-122.128059,-122.145489,-122.145489,-122.145489,-122.155887,-122.155887,-122.155887,-122.207145,-122.207145,-122.207145,-122.207145,-122.252302896,-122.252302896,-122.252302896,-122.252302896,-122.296304,-120.268246,-120.2682918,-120.2682918,-120.2682918,-120.2682918,-118.99319,-118.99324,-121.974546,-121.991188,-121.991188,-121.991188,-121.991188,-122.029408,-122.029408,-122.029408,-122.029408,-122.102064,-122.102064,-122.102101,-122.102101,-122.153467,-122.153467,-122.153467,-122.153467,-122.153467,-122.159,-122.159,-122.159,-122.159,-119.23266,-119.23266,-121.988839,-121.994654,-122.000431,-121.995328,-121.995462,-121.995462,-122.004195,-122.003131,-122.003131,-121.995642,-122.017114,-122.03913,-122.03913,-122.029578,-122.029578,-122.074517,-122.039923,-122.039923,-122.043564,-122.043564,-122.043564,-122.072131,-122.072131,-122.072131,-122.072131,-122.122728,-122.122728,-122.182325,-122.182325,-122.182325,-122.182325,-122.224557,-122.224557,-122.224557,-122.361879,-122.361879,-122.361879,-122.361879,-120.0197,-120.0197,-122.006864,-122.006864,-122.006864,-121.97482,-121.97482,-122.166514,-122.166514,-122.166514,-122.38096639,-122.38096639,-122.38096639,-122.38096639,-120.47905204,-120.479587,-120.477751,-120.478203,-120.475535,-120.475782,-120.471742,-120.473529,-120.479798,-120.477381,-122.063,-122.085546,-122.085546,-122.085546,-122.085546,-122.0759,-122.0761,-122.065966,-122.198787,-122.198787,-122.198787,-122.198787,-122.198787,-120.37601,-120.37601,-117.910705,-117.910705,-122.254839,-122.294453,-122.294453,-122.294453,-122.294453,-122.294453,-122.333847,-122.333847,-122.333847,-122.333847,-122.244303,-122.244265,-122.246346,-122.2300515,-122.2954,-122.2954,-122.295136,-122.295155,-122.301553,-122.301538,-122.3017765,-122.288336,-122.2882768,-122.2731396,-122.2731626,-122.3091367,-122.3091373,-122.3091349,-122.3091356,-122.3383,-122.3383,-122.85346,-121.3651,-121.133878,-121.133878,-121.136652,-121.134001,-122.12692,-121.10509,-121.105409,-121.1049557,-121.104957,-121.1587,-121.157843,-121.157859,-121.15879,-121.029379,-121.028608,-121.028552,-121.028682,-120.959864,-120.959791,-120.959347,-120.959004,-122.34346,-122.31547,-122.31425,-122.31178,-122.31088,-122.31066,-122.30427,-122.3658,-122.544563,-122.544563,-122.544563,-122.544563,-121.41462,-121.395484,-121.9748336,-121.9748336,-121.9748336,-121.9748336,-121.45195,-121.484248,-121.493084,-121.525125,-121.515967,-121.545492,-121.5574037,-121.556709,-121.5586,-121.481067,-121.341703,-121.360836,-121.410553,-121.345209,-121.372667,-121.341139,0],1.5,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"setView":[[37.6,-118.63],6,[]],"limits":{"lat":[0,41.997975],"lng":[-124.201582,0]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+
+
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden">
+
+</div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/rickard11\.github\.io\/CNRA_map\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>
