@@ -24,7 +24,7 @@ jobs:
           r-version: '4.4'
           use-public-rspm: true
 
-      - name: Install system dependencies
+       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -36,7 +36,9 @@ jobs:
             libgeos-dev \
             libproj-dev \
             libsqlite3-dev \
-            libudunits2-dev
+            libudunits2-dev \
+            libfreetype6-dev \
+            libfontconfig1-dev
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
