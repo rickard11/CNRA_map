@@ -4,28 +4,40 @@
     "href": "TNCMap.html",
     "title": "TNCMap.qmd",
     "section": "",
-    "text": "library(leaflet)\n\nTNC&lt;-read.csv(\"data/CalGRO_well_locations_extended.csv\")\n\nCalgro_map &lt;- leaflet(TNC) %&gt;%\n  addTiles() %&gt;%\n  addProviderTiles(\"Esri.WorldImagery\") %&gt;%\n  setView(lng = -118.63, lat = 37.6, zoom = 6) %&gt;%\n  addCircleMarkers(\n    ~Longitude, ~Latitude,\n    radius = 1.5,) \nCalgro_map"
+    "text": "library(leaflet)\n\nTNC&lt;-read.csv(\"data/CalGRO_well_locations_extended.csv\")\n\nCalgro_map &lt;- leaflet(TNC) %&gt;%\n  addTiles() %&gt;%\n  addProviderTiles(\"Esri.WorldImagery\") %&gt;%\n  setView(lng = -118.63, lat = 37.6, zoom = 6) %&gt;%\n  addCircleMarkers(\n    ~Longitude, ~Latitude,\n    radius = 1.5,) \nCalgro_map",
+    "crumbs": [
+      "TNCMap.qmd"
+    ]
   },
   {
     "objectID": "TNCMap.html#column",
     "href": "TNCMap.html#column",
     "title": "TNCMap.qmd",
     "section": "",
-    "text": "library(leaflet)\n\nTNC&lt;-read.csv(\"data/CalGRO_well_locations_extended.csv\")\n\nCalgro_map &lt;- leaflet(TNC) %&gt;%\n  addTiles() %&gt;%\n  addProviderTiles(\"Esri.WorldImagery\") %&gt;%\n  setView(lng = -118.63, lat = 37.6, zoom = 6) %&gt;%\n  addCircleMarkers(\n    ~Longitude, ~Latitude,\n    radius = 1.5,) \nCalgro_map"
+    "text": "library(leaflet)\n\nTNC&lt;-read.csv(\"data/CalGRO_well_locations_extended.csv\")\n\nCalgro_map &lt;- leaflet(TNC) %&gt;%\n  addTiles() %&gt;%\n  addProviderTiles(\"Esri.WorldImagery\") %&gt;%\n  setView(lng = -118.63, lat = 37.6, zoom = 6) %&gt;%\n  addCircleMarkers(\n    ~Longitude, ~Latitude,\n    radius = 1.5,) \nCalgro_map",
+    "crumbs": [
+      "TNCMap.qmd"
+    ]
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "CNRA_map",
     "section": "",
-    "text": "This data was sourced from California Natural Resources Agency (CNRA). This page is meant only for visualization purposes and is not frequently updated. If you are interested in downloading data for a particular site it can be rendered using the station ID (image title) at https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements/resource/84e02633-00ca-47e8-97ec-c0093313ddcd.\nIf you would like more information on the meta data please visit https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements."
+    "text": "This data was sourced from California Natural Resources Agency (CNRA). This page is meant only for visualization purposes and is not frequently updated. If you are interested in downloading data for a particular site it can be rendered using the station ID (image title) at https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements/resource/84e02633-00ca-47e8-97ec-c0093313ddcd.\nIf you would like more information on the meta data please visit https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements.",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
     "objectID": "index.html#california-groundwater-data",
     "href": "index.html#california-groundwater-data",
     "title": "CNRA_map",
     "section": "",
-    "text": "This data was sourced from California Natural Resources Agency (CNRA). This page is meant only for visualization purposes and is not frequently updated. If you are interested in downloading data for a particular site it can be rendered using the station ID (image title) at https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements/resource/84e02633-00ca-47e8-97ec-c0093313ddcd.\nIf you would like more information on the meta data please visit https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements."
+    "text": "This data was sourced from California Natural Resources Agency (CNRA). This page is meant only for visualization purposes and is not frequently updated. If you are interested in downloading data for a particular site it can be rendered using the station ID (image title) at https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements/resource/84e02633-00ca-47e8-97ec-c0093313ddcd.\nIf you would like more information on the meta data please visit https://data.cnra.ca.gov/dataset/continuous-groundwater-level-measurements.",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
     "objectID": "about.html",
