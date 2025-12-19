@@ -38,7 +38,9 @@ jobs:
             libsqlite3-dev \
             libudunits2-dev \
             libfreetype6-dev \
-            libfontconfig1-dev
+            libfontconfig1-dev \
+            libharfbuzz-dev \
+            libfribidi-dev
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
