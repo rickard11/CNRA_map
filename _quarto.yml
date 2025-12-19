@@ -5,15 +5,15 @@ project:
     - plots/
 
 website:
-  title: "CNRA_map"
-  navbar:
-    left:
+  title: "California Groundwater Maps"
+  sidebar:
+    contents:
       - href: index.qmd
         text: Home
       - href: dashboard.qmd
       - text: Dashboard
-      - href: TNC Sites
-      - text: TNCMap.qmd
+      - href: TNCMap.qmd
+      - text: TNC Sites
 
 format:
   html:
