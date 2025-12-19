@@ -1,0 +1,6 @@
+docs/
+plots/
+data/
+*.png
+*.html
+*.csv

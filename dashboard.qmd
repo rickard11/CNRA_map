@@ -11,17 +11,34 @@ format: dashboard
 # 3. Create list of file paths for popupss
 library(tidyverse)
 library(leaflet)
+library(leafpop)
 ```
 
 ```{r, printmap}
 well_location<- read.csv("data/CNRA_well_location.csv")
 
-CNRA_Calgro_map<-leaflet(well_location) %>%
+pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = c(5, 55)  # values from 5 to 30
+)
+
+popup_html <- function(id) {
+  paste0(
+    "<b>Station:</b> ", id, "<br>",
+    "<img src='plots/", id, ".png' width='300'>"
+  )
+}
+
+CNRA_Calgro_map <- leaflet(well_location) %>%
   addTiles() %>%
-  addProviderTiles("Esri.WorldImagery") %>%   # 🌍 Aerial imagery basemap
+  addProviderTiles("Esri.WorldImagery") %>%
   setView(lng = -118.63, lat = 37.6, zoom = 6) %>%
   addCircleMarkers(
     ~LONGITUDE, ~LATITUDE,
-    radius = 1.5)
+    radius = 1.5,
+    color = ~pal(Numberofyears),
+    fillOpacity = 0.8,
+    popup = ~popup_html(STATION)
+  ) 
 CNRA_Calgro_map
 ```

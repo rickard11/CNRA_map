@@ -1,5 +1,8 @@
 project:
   type: website
+  output-dir: docs
+  resources:
+    - plots/
 
 website:
   title: "CNRA_map"
