@@ -1,9 +1,10 @@
 ---
-title: "dashboard"
+title: "CNRA Well Data"
 editor: visual
 format: dashboard
 ---
 
+## Column {width="30%"}
 
 ```{r, loadpackages}
 #|echo: false
