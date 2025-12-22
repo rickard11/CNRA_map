@@ -1,0 +1,10 @@
+---
+title: "Randall"
+editor: visual
+format:
+  dashboard:
+    orientation: columns
+---
+
+
+This is placeholder content

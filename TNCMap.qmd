@@ -125,7 +125,7 @@ Santa_Cruz_isl
 Santa_Clara <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -119.05, lat = 34.34, zoom = 11) %>%
+  setView(lng = -119.05, lat = 34.36, zoom = 11) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
