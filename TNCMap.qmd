@@ -1,9 +1,11 @@
 ---
 title: "TNC Map"
 editor: visual
+format: dashboard
 ---
 
-## Column {width="30%"}
+## Row {height="100%"}
+### Column {width="33%"}
 ```{r, echo=FALSE}
 
 library(leaflet)
@@ -19,3 +21,31 @@ Calgro_map <- leaflet(TNC) %>%
     radius = 1.5,) 
 Calgro_map
 ```
+
+## Row {height="33%"}
+### Column {width="33%"}
+```{r, echo=FALSE}
+
+library(leaflet)
+
+TNC<-read.csv("data/CalGRO_well_locations_extended.csv")
+
+Calgro_map <- leaflet(TNC) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.WorldImagery") %>%
+  setView(lng = -118.63, lat = 37.6, zoom = 6) %>%
+  addCircleMarkers(
+    ~Longitude, ~Latitude,
+    radius = 1.5,) 
+Calgro_map
+```
+
+## Row {height="33%"}
+### Column {width="33%"}
+
+place holder content
+
+## Row {height="33%"}
+### Column {width="33%"}
+place holder content
+
