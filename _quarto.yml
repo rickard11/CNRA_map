@@ -11,9 +11,9 @@ website:
       - href: index.qmd
         text: Home
       - href: dashboard.qmd
-      - text: Dashboard
+        text: Dashboard
       - href: TNCMap.qmd
-      - text: TNC Sites
+        text: TNC Sites
 
 format:
   html:

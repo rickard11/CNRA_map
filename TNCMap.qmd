@@ -5,6 +5,7 @@ editor: visual
 
 ## Column {width="30%"}
 ```{r}
+#|echo: false
 library(leaflet)
 
 TNC<-read.csv("data/CalGRO_well_locations_extended.csv")

@@ -15,6 +15,7 @@ library(leafpop)
 ```
 
 ```{r, printmap}
+#|echo: false
 well_location<- read.csv("data/CNRA_well_location.csv")
 
 pal <- colorNumeric(
