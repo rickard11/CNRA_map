@@ -1,8 +1,9 @@
 ---
 title: "TNC Map"
 editor: visual
-format: dashboard
-orientation: columns
+format:
+  dashboard:
+    orientation: columns
 ---
 
 
