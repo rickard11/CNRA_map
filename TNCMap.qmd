@@ -36,13 +36,8 @@ my_shapefile_11 <- st_transform(my_shapefile, 4326)
 ```
 
 ```{r}
-
-Randall_1 <- leaflet(my_shapefile_11) %>%
-  addTiles() %>%
-  addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
-  addPolygons()
-Randall_1
+par(mar = c(0, 0, 0, 0))
+plot(st_geometry(my_shapefile_11), col = "#f2f2f2", bg = "skyblue", lwd = 0.25, border = 0)
 ```
 
 ```{r,echo=FALSE}
