@@ -5,7 +5,6 @@ format: dashboard
 ---
 
 ## Column {width="30%"}
-
 ```{r, loadpackages}
 #|echo: false
 #|include: false
