@@ -46,12 +46,12 @@ Randall <- leaflet(my_shapefile_11) %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
   setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
   addPolygons(
-    color = "black", 
-    fillColor = "pink",     # Border color
-    weight = 1,          # Border width
-    fillOpacity = 0.6,   # Fill transparency
-    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
-  )
+  color = "black",
+  fillColor = "pink",
+  weight = 1,
+  fillOpacity = 0.6
+)
+
 Randall
 ```
 
