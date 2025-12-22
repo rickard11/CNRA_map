@@ -25,11 +25,10 @@ Calgro_map <- leaflet(TNC) %>%
 Calgro_map
 ```
 
-## Column {width="70%"}
+## Column {width="35%"}
 
-### Row {height="33%"}
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, include=FALSE}
 #| title: "Frank and Joan Randall Preserve"
 my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
 my_shapefile_11 <- st_transform(my_shapefile, 4326)
@@ -39,12 +38,20 @@ my_shapefile_11 <- my_shapefile_11 |>
   st_transform(4326)
 ```
 
+### Row {height="33%"}
+
 ```{r,echo=FALSE,warning=FALSE}
 Randall <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
   setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
-  addPolygons()
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
 
 Randall
 
@@ -89,3 +96,61 @@ Dangermond <- leaflet(my_shapefile_11) %>%
 Dangermond
 ```
 
+## Column {width="35%"}
+
+### Row {height="33%"}
+
+```{r, echo=FALSE}
+#| title: "Santa Cruz Island"
+
+Santa_Cruz_isl<- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -119.74, lat = 34, zoom = 11) %>%
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
+Santa_Cruz_isl
+```
+
+### Row {height="33%"}
+
+```{r, echo=FALSE}
+#| title: "Santa Clara River"
+
+Santa_Clara <- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -119.05, lat = 34.34, zoom = 12) %>%
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
+Santa_Clara
+```
+
+### Row {height="33%"}
+
+```{r, echo=FALSE}
+#| title: "Parks Creek"
+
+Parks <- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -122.5, lat = 41.46, zoom = 12) %>%
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
+Parks
+```
