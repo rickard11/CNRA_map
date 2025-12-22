@@ -1,25 +1,5 @@
 [
   {
-    "objectID": "TNCMap.html",
-    "href": "TNCMap.html",
-    "title": "TNCMap.qmd",
-    "section": "",
-    "text": "#|echo: false\nlibrary(leaflet)\n\nTNC&lt;-read.csv(\"data/CalGRO_well_locations_extended.csv\")\n\nCalgro_map &lt;- leaflet(TNC) %&gt;%\n  addTiles() %&gt;%\n  addProviderTiles(\"Esri.WorldImagery\") %&gt;%\n  setView(lng = -118.63, lat = 37.6, zoom = 6) %&gt;%\n  addCircleMarkers(\n    ~Longitude, ~Latitude,\n    radius = 1.5,) \nCalgro_map",
-    "crumbs": [
-      "TNC Sites"
-    ]
-  },
-  {
-    "objectID": "TNCMap.html#column",
-    "href": "TNCMap.html#column",
-    "title": "TNCMap.qmd",
-    "section": "",
-    "text": "#|echo: false\nlibrary(leaflet)\n\nTNC&lt;-read.csv(\"data/CalGRO_well_locations_extended.csv\")\n\nCalgro_map &lt;- leaflet(TNC) %&gt;%\n  addTiles() %&gt;%\n  addProviderTiles(\"Esri.WorldImagery\") %&gt;%\n  setView(lng = -118.63, lat = 37.6, zoom = 6) %&gt;%\n  addCircleMarkers(\n    ~Longitude, ~Latitude,\n    radius = 1.5,) \nCalgro_map",
-    "crumbs": [
-      "TNC Sites"
-    ]
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "CNRA_map",
