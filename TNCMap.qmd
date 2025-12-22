@@ -29,7 +29,7 @@ Calgro_map
 
 ### Row {height="33%"}
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 #| title: "Frank and Joan Randall Preserve"
 my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
 my_shapefile_11 <- st_transform(my_shapefile, 4326)
@@ -39,12 +39,7 @@ my_shapefile_11 <- my_shapefile_11 |>
   st_transform(4326)
 ```
 
-```{r}
-par(mar = c(0, 0, 0, 0))
-plot(st_geometry(my_shapefile_11), col = "#f2f2f2", bg = "skyblue", lwd = 0.25, border = 0)
-```
-
-```{r,echo=FALSE}
+```{r,echo=FALSE,warning=FALSE}
 Randall <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
@@ -52,7 +47,6 @@ Randall <- leaflet(my_shapefile_11) %>%
   addPolygons()
 
 Randall
-sf::st_crs(my_shapefile_11)
 
 
 ```
