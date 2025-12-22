@@ -28,18 +28,17 @@ Calgro_map
 
 ```{r, echo=FALSE}
 
-library(leaflet)
+library(sf)
 
-TNC<-read.csv("data/CalGRO_well_locations_extended.csv")
+my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
 
-Calgro_map <- leaflet(TNC) %>%
-  addTiles() %>%
-  addProviderTiles("Esri.WorldImagery") %>%
-  setView(lng = -118.63, lat = 37.6, zoom = 6) %>%
-  addCircleMarkers(
-    ~Longitude, ~Latitude,
-    radius = 1.5,) 
-Calgro_map
+
+my_shapefile_11 <- sf::st_transform(my_shapefile, 4326)
+ggplot() + 
+  geom_sf(data = my_shapefile_11, size = 1.5, color = "black", fill = "cyan1") + 
+  ggtitle("calgro properties") +
+  coord_sf(xlim = c(-119,-118), ylim = c(35,35.5))
+
 ```
 
 ## Row {height="33%"}
@@ -49,5 +48,6 @@ place holder content
 
 ## Row {height="33%"}
 ### Column {width="70%"}
+
 place holder content
 
