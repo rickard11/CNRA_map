@@ -2,13 +2,14 @@
 title: "TNC Map"
 editor: visual
 format: dashboard
+  orientation: columns
 ---
 
-## Row {height="100%"}
-### Column {width="30%"}
+
+## Column {width="30%"}
 
 ```{r, echo=FALSE}
-
+library(sf)
 library(leaflet)
 
 TNC<-read.csv("data/CalGRO_well_locations_extended.csv")
@@ -23,31 +24,49 @@ Calgro_map <- leaflet(TNC) %>%
 Calgro_map
 ```
 
-## Row {height="33%"}
-### Column {width="70%"}
+## Column {width="70%"}
+
+### Row {height="33%"}
 
 ```{r, echo=FALSE}
-
-library(sf)
-
+#| title: "Frank and Joan Randall Preserve"
 my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
-
-
 my_shapefile_11 <- sf::st_transform(my_shapefile, 4326)
-ggplot() + 
-  geom_sf(data = my_shapefile_11, size = 1.5, color = "black", fill = "cyan1") + 
-  ggtitle("calgro properties") +
-  coord_sf(xlim = c(-119,-118), ylim = c(35,35.5))
 
+Randall <- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
+Randall
 ```
 
-## Row {height="33%"}
-### Column {width="70%"}
+### Row {height="33%"}
 
-place holder content
+```{r, echo=FALSE}
+#| title: "Las Piletas Preserve"
 
-## Row {height="33%"}
-### Column {width="70%"}
+Las_Piletas <- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -120.1, lat = 35.3, zoom = 11) %>%
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
+Las_Piletas
+```
+
+### Row {height="33%"}
 
 place holder content
 
