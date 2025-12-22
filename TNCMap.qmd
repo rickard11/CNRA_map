@@ -19,7 +19,7 @@ Calgro_map <- leaflet(TNC) %>%
   addTiles() %>%
   addProviderTiles("Esri.WorldImagery") %>%
   setView(lng = -118.63, lat = 37.6, zoom = 6) %>%
-  addCircleMarkers(
+  addCircleMarkers(color="green",
     ~Longitude, ~Latitude,
     radius = 1.5,) 
 Calgro_map
