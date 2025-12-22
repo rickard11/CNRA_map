@@ -33,6 +33,10 @@ Calgro_map
 #| title: "Frank and Joan Randall Preserve"
 my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
 my_shapefile_11 <- st_transform(my_shapefile, 4326)
+my_shapefile_11 <- sf::st_zm(my_shapefile_11, drop = TRUE, what = "ZM")
+my_shapefile_11 <- my_shapefile_11 |>
+  st_zm(drop = TRUE, what = "ZM") |>
+  st_transform(4326)
 ```
 
 ```{r}
@@ -45,14 +49,12 @@ Randall <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
   setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
-  addPolygons(
-  color = "black",
-  fillColor = "pink",
-  weight = 1,
-  fillOpacity = 0.6
-)
+  addPolygons()
 
 Randall
+sf::st_crs(my_shapefile_11)
+
+
 ```
 
 ### Row {height="33%"}
