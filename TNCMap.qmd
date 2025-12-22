@@ -4,8 +4,9 @@ editor: visual
 format: dashboard
 ---
 
-## Row {height="33%"}
-### Column {width="100%"}
+## Row {height="100%"}
+### Column {width="30%"}
+
 ```{r, echo=FALSE}
 
 library(leaflet)
@@ -23,7 +24,8 @@ Calgro_map
 ```
 
 ## Row {height="33%"}
-### Column {width="33%"}
+### Column {width="70%"}
+
 ```{r, echo=FALSE}
 
 library(leaflet)
@@ -41,11 +43,11 @@ Calgro_map
 ```
 
 ## Row {height="33%"}
-### Column {width="33%"}
+### Column {width="70%"}
 
 place holder content
 
 ## Row {height="33%"}
-### Column {width="33%"}
+### Column {width="70%"}
 place holder content
 
