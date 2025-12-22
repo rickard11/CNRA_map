@@ -32,9 +32,18 @@ Calgro_map
 ```{r, echo=FALSE}
 #| title: "Frank and Joan Randall Preserve"
 my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
-my_shapefile_11 <- sf::st_transform(my_shapefile, 4326)
+my_shapefile_11 <- st_transform(my_shapefile, 4326)
 ```
 
+```{r}
+
+Randall_1 <- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
+  addPolygons()
+Randall_1
+```
 
 ```{r,echo=FALSE}
 Randall <- leaflet(my_shapefile_11) %>%
