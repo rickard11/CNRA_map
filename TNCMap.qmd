@@ -4,8 +4,8 @@ editor: visual
 format: dashboard
 ---
 
-## Row {height="100%"}
-### Column {width="33%"}
+## Row {height="33%"}
+### Column {width="100%"}
 ```{r, echo=FALSE}
 
 library(leaflet)
