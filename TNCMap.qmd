@@ -29,7 +29,6 @@ Calgro_map
 
 
 ```{r, echo=FALSE, warning=FALSE, include=FALSE}
-#| title: "Frank and Joan Randall Preserve"
 my_shapefile <- st_read("data/shapefiles/TNCLands_CalGRO.shp")
 my_shapefile_11 <- st_transform(my_shapefile, 4326)
 my_shapefile_11 <- sf::st_zm(my_shapefile_11, drop = TRUE, what = "ZM")
@@ -41,10 +40,11 @@ my_shapefile_11 <- my_shapefile_11 |>
 ### Row {height="33%"}
 
 ```{r,echo=FALSE,warning=FALSE}
+#| title: "Frank and Joan Randall Preserve"
 Randall <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -118.5, lat = 35.25, zoom = 10) %>%
+  setView(lng = -118.5, lat = 35.25, zoom = 9) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
@@ -66,7 +66,7 @@ Randall
 Las_Piletas <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -120.1, lat = 35.3, zoom = 11) %>%
+  setView(lng = -120.1, lat = 35.3, zoom = 10) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
@@ -85,7 +85,7 @@ Las_Piletas
 Dangermond <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -120.45, lat = 34.5, zoom = 11) %>%
+  setView(lng = -120.45, lat = 34.5, zoom = 10) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
@@ -106,7 +106,7 @@ Dangermond
 Santa_Cruz_isl<- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -119.74, lat = 34, zoom = 11) %>%
+  setView(lng = -119.74, lat = 34, zoom = 10) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
@@ -125,7 +125,7 @@ Santa_Cruz_isl
 Santa_Clara <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -119.05, lat = 34.34, zoom = 12) %>%
+  setView(lng = -119.05, lat = 34.34, zoom = 11) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
@@ -144,7 +144,7 @@ Santa_Clara
 Parks <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
-  setView(lng = -122.5, lat = 41.46, zoom = 12) %>%
+  setView(lng = -122.5, lat = 41.46, zoom = 11) %>%
   addPolygons(
     color = "black", 
     fillColor = "pink",     # Border color
