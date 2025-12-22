@@ -2,7 +2,7 @@
 title: "TNC Map"
 editor: visual
 format: dashboard
-  orientation: columns
+orientation: columns
 ---
 
 
@@ -68,5 +68,20 @@ Las_Piletas
 
 ### Row {height="33%"}
 
-place holder content
+```{r, echo=FALSE}
+#| title: "Dangermond Preserve"
+
+Dangermond <- leaflet(my_shapefile_11) %>%
+  addTiles() %>%
+  addProviderTiles("Esri.NatGeoWorldMap") %>%
+  setView(lng = -120.45, lat = 34.5, zoom = 11) %>%
+  addPolygons(
+    color = "black", 
+    fillColor = "pink",     # Border color
+    weight = 1,          # Border width
+    fillOpacity = 0.6,   # Fill transparency
+    popup = ~LRM_TR_NA        # Optional: Add popups based on a column, e.g., 'NAME'
+  )
+Dangermond
+```
 
