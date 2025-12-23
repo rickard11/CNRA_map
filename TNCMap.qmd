@@ -19,7 +19,7 @@ Calgro_map <- leaflet(TNC) %>%
   addTiles() %>%
   addProviderTiles("Esri.WorldImagery") %>%
   setView(lng = -118.63, lat = 37.6, zoom = 6) %>%
-  addCircleMarkers(color="green",
+  addCircleMarkers(color="blue",
     ~Longitude, ~Latitude,
     radius = 1.5,) 
 Calgro_map
@@ -40,7 +40,7 @@ my_shapefile_11 <- my_shapefile_11 |>
 ### Row {height="33%"}
 
 ```{r,echo=FALSE,warning=FALSE}
-#| title: "Frank and Joan Randall Preserve"
+#| title: "[Visit Randall webpage](https://rickard11.github.io/CNRA_map/Randall.html)"
 Randall <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
   addProviderTiles("Esri.NatGeoWorldMap") %>%
@@ -61,7 +61,7 @@ Randall
 ### Row {height="33%"}
 
 ```{r, echo=FALSE}
-#| title: "Las Piletas Preserve"
+#| title: "[Visit Las Piletas webpage](https://rickard11.github.io/CNRA_map/Las_Piletas.html)"
 
 Las_Piletas <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
@@ -80,7 +80,7 @@ Las_Piletas
 ### Row {height="33%"}
 
 ```{r, echo=FALSE}
-#| title: "Dangermond Preserve"
+#| title: "[Visit Dangermond webpage](https://rickard11.github.io/CNRA_map/Dangermond.html)"
 
 Dangermond <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
@@ -101,7 +101,7 @@ Dangermond
 ### Row {height="33%"}
 
 ```{r, echo=FALSE}
-#| title: "Santa Cruz Island"
+#| title: "[Visit Santa Cruz Island webpage](https://rickard11.github.io/CNRA_map/Santa_Cruz_Island.html)"
 
 Santa_Cruz_isl<- leaflet(my_shapefile_11) %>%
   addTiles() %>%
@@ -120,7 +120,7 @@ Santa_Cruz_isl
 ### Row {height="33%"}
 
 ```{r, echo=FALSE}
-#| title: "Santa Clara River"
+#| title: "[Visit Santa Clara River webpage](https://rickard11.github.io/CNRA_map/Santa_Clara_River.html)"
 
 Santa_Clara <- leaflet(my_shapefile_11) %>%
   addTiles() %>%
@@ -139,7 +139,7 @@ Santa_Clara
 ### Row {height="33%"}
 
 ```{r, echo=FALSE}
-#| title: "Parks Creek"
+#| title: "[Visit Parks Creek webpage](https://rickard11.github.io/CNRA_map/Santa_Parks_Creek.html)"
 
 Parks <- leaflet(my_shapefile_11) %>%
   addTiles() %>%

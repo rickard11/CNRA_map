@@ -1,0 +1,9 @@
+---
+title: "Santa_Cruz_Island"
+editor: visual
+format:
+  dashboard:
+    orientation: columns
+---
+
+Place holder content is here

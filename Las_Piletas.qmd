@@ -1,0 +1,7 @@
+---
+title: "Las_Piletas"
+editor: visual
+format:
+  dashboard:
+    orientation: columns
+---

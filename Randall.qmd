@@ -8,3 +8,88 @@ format:
 
 
 This is placeholder content
+
+```{r,BCWell}
+library(plotly)
+library (dplyr)
+bcrain<-read.csv("data/12-1-2025 CalGro Download/Randall B and C Ranch Rain gauge Rain Gauge 20231102-20251201.csv")
+bcwell<-read.csv("data/12-1-2025 CalGro Download/Randall B and C Ranch Well Well 20231102-20251201.csv")
+bcwell$Date.and.Time<-as.POSIXct(bcwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+bcwell$Date<-format(bcwell$Date.and.Time,format="%Y-%m-%d")
+bcwell$Date<-as.POSIXct(bcwell$Date,format="%Y-%m-%d")
+bcall<-merge(bcwell,bcrain,by="Date",all.x=TRUE,all.y=TRUE)
+
+#bcrain<-bcrain[bcrain$Date<="2025-05-01",]
+hourly_data<-bcwell
+daily_data<-bcrain
+
+# Prepare data for faceting
+hourly_data_long <- hourly_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date.and.Time),variable = "Water Depth", value = ft..below.ground.) %>%
+  select(Date.and.Time, variable, value)
+
+daily_data_long <- daily_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date), variable = "Rainfall", value = Rain..in.) %>%
+  select(Date.and.Time, variable, value)
+
+combined <- bind_rows(hourly_data_long, daily_data_long)
+unique(combined$variable)
+
+
+p <- ggplot(combined, aes(x = Date.and.Time, y = value)) +
+  geom_line(data = filter(combined, variable == "Water Depth"), color = "navy") +
+  geom_col(data = filter(combined, variable == "Rainfall"), fill = "lightblue", alpha = 0.6) +
+  scale_y_reverse() + 
+  facet_wrap(~variable, ncol = 1, scales = "free_y") +
+  labs(x = "Date", y = NULL, title = "B & C Well Depth and Rainfall") +
+  theme_minimal()
+
+# Convert to interactive plot
+ggplotly(p)
+
+```
+
+
+```{r, CactusPasture}
+cpwell<-read.csv("data/12-1-2025 CalGro Download/Randall Cactus Pasture Well Well 20231102-20251201.csv")
+cpwell$Date.and.Time<-as.POSIXct(cpwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+cpwell$Date<-format(cpwell$Date.and.Time,format="%Y-%m-%d")
+cpwell$Date<-as.POSIXct(cpwell$Date,format="%Y-%m-%d")
+cprain<-read.csv("data/12-1-2025 CalGro Download/Randall Cactus Pasture Rain Gauge Rain Gauge 20231102-20251201.csv")
+cpall<-merge(cpwell,cprain,by="Date",all.x=TRUE,all.y=TRUE)
+
+
+cprain<-cprain[cprain$Date<="2025-05-01",]
+hourly_data<-cpwell
+daily_data<-cprain
+
+# Prepare data for faceting
+hourly_data_long <- hourly_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date.and.Time),variable = "Water Depth", value = ft..below.ground.) %>%
+  select(Date.and.Time, variable, value)
+
+daily_data_long <- daily_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date), variable = "Rainfall", value = Rain..in.) %>%
+  select(Date.and.Time, variable, value)
+
+combined <- bind_rows(hourly_data_long, daily_data_long)
+
+ggplot(combined, aes(x = Date.and.Time, y = value)) +
+  geom_line(data = filter(combined, variable == "Water Depth"), color = "navy") +
+  geom_col(data = filter(combined, variable == "Rainfall"), fill = "lightblue", alpha = 0.6) +
+  scale_y_reverse() +
+  facet_wrap(~variable, ncol = 1, scales = "free_y") +
+  labs(x = "Date", y = NULL, title = "Cactus Pasture Well Depth and Rainfall") +
+  theme_minimal()
+
+p <- ggplot(combined, aes(x = Date.and.Time, y = value)) +
+  geom_line(data = filter(combined, variable == "Water Depth"), color = "navy") +
+  geom_col(data = filter(combined, variable == "Rainfall"), fill = "lightblue", alpha = 0.6) +
+  scale_y_reverse() +
+  facet_wrap(~variable, ncol = 1, scales = "free_y") +
+  labs(x = "Date", y = NULL, title = "Cactus Pasture Well Depth and Rainfall") +
+  theme_minimal()
+
+# Convert to interactive plot
+ggplotly(p)
+```
