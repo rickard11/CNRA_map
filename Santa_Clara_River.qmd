@@ -11,7 +11,6 @@ Place holder content is here
 ```{r,hanson}
 library(plotly)
 library (dplyr)
-library(cowplot)
 hansonrain<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Hanson Retired Rain Gauge Rain Gauge 20231102-20251201.csv")
 hansonwell<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Hanson Retired Well Well 20231102-20251201.csv")
 hansonwell$Date.and.Time<-as.POSIXct(hansonwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
