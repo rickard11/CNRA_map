@@ -2,22 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rickard11.github.io/CNRA_map/dashboard.html</loc>
-    <lastmod>2025-12-22T19:14:04.929Z</lastmod>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rickard11.github.io/CNRA_map/Parks_Creek.html</loc>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
   </url>
   <url>
     <loc>https://rickard11.github.io/CNRA_map/TNCMap.html</loc>
-    <lastmod>2025-12-22T19:14:04.929Z</lastmod>
-  </url>
-  <url>
-    <loc>https://rickard11.github.io/CNRA_map/Randall.html</loc>
-    <lastmod>2025-12-22T19:14:04.929Z</lastmod>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
   </url>
   <url>
     <loc>https://rickard11.github.io/CNRA_map/index.html</loc>
-    <lastmod>2025-12-22T19:14:05.066Z</lastmod>
+    <lastmod>2025-12-29T14:40:01.262Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rickard11.github.io/CNRA_map/Santa_Clara_River.html</loc>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rickard11.github.io/CNRA_map/Dangermond.html</loc>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rickard11.github.io/CNRA_map/Randall.html</loc>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rickard11.github.io/CNRA_map/Santa_Cruz_Island.html</loc>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
   </url>
   <url>
     <loc>https://rickard11.github.io/CNRA_map/about.html</loc>
-    <lastmod>2025-12-22T19:14:04.929Z</lastmod>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rickard11.github.io/CNRA_map/Las_Piletas.html</loc>
+    <lastmod>2025-12-29T14:40:01.112Z</lastmod>
   </url>
 </urlset>
