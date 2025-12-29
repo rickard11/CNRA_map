@@ -38,7 +38,6 @@ p<-ggplot(data = hourly_data_long, aes(x = Date.and.Time)) +
 q<-ggplot(data = daily_data_long, aes(x = Date.and.Time)) +
   geom_col(color = "navy",aes(y=value))+scale_y_reverse()+theme_bw()+xlab("")
 
-plot_grid(q,p, ncol = 1)
 
 ```
 
