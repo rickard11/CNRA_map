@@ -8,3 +8,77 @@ format:
 
 Place holder content is here
 
+```{r,hanson}
+library(plotly)
+library (dplyr)
+library(cowplot)
+hansonrain<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Hanson Retired Rain Gauge Rain Gauge 20231102-20251201.csv")
+hansonwell<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Hanson Retired Well Well 20231102-20251201.csv")
+hansonwell$Date.and.Time<-as.POSIXct(hansonwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+hansonwell$Date<-format(hansonwell$Date.and.Time,format="%Y-%m-%d")
+hansonwell$Date<-as.POSIXct(hansonwell$Date,format="%Y-%m-%d")
+hansonall<-merge(hansonwell,hansonrain,by="Date",all.x=TRUE,all.y=TRUE)
+
+#hansonrain<-hansonrain[hansonrain$Date<="2025-05-01",]
+hourly_data<-hansonwell
+daily_data<-hansonrain
+
+# Prepare data for faceting
+hourly_data_long <- hourly_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date.and.Time),variable = "Water Depth", value = ft..below.ground.) %>%
+  select(Date.and.Time, variable, value)
+
+daily_data_long <- daily_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date), variable = "Rainfall", value = Rain..in.) %>%
+  select(Date.and.Time, variable, value)
+
+### Make 2 seperate interactive plots with the same scales
+p<-ggplot(data = hourly_data_long, aes(x = Date.and.Time)) +
+  geom_line(color = "navy",aes(y=value))+scale_y_reverse()+theme_bw()
+
+q<-ggplot(data = daily_data_long, aes(x = Date.and.Time)) +
+  geom_col(color = "navy",aes(y=value))+scale_y_reverse()+theme_bw()+xlab("")
+
+plot_grid(q,p, ncol = 1)
+
+```
+
+
+```{r,Aflalo}
+aflalorain<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Aflalo Rain Gauge Rain Gauge 20231102-20251201.csv")
+aflalowell<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Aflalo Well Well 20231103-20251201.csv")
+aflalowell$Date.and.Time<-as.POSIXct(aflalowell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+aflalowell$Date<-format(aflalowell$Date.and.Time,format="%Y-%m-%d")
+aflalowell$Date<-as.POSIXct(aflalowell$Date,format="%Y-%m-%d")
+aflaloall<-merge(aflalowell,aflalorain,by="Date",all.x=TRUE,all.y=TRUE)
+
+hourly_data<-aflalowell
+daily_data<-aflalorain
+
+# Prepare data for faceting
+hourly_data_long <- hourly_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date.and.Time),variable = "Water Depth", value = ft..below.ground.) %>%
+  select(Date.and.Time, variable, value)
+
+daily_data_long <- daily_data %>%
+  mutate(Date.and.Time = as.POSIXct(Date), variable = "Rainfall", value = Rain..in.) %>%
+  select(Date.and.Time, variable, value)
+
+### Make 2 seperate interactive plots with the same scale
+
+a<-plot_ly(data= daily_data_long, x = daily_data_long$Date.and.Time, 
+        y = daily_data_long$value, type = 'bar',marker =list(color="99CCff")) %>%
+        layout(yaxis = list(autorange = "reversed"))
+
+
+b<-plot_ly(x=hourly_data_long$Date.and.Time, y=hourly_data_long$value, 
+        type = 'scatter', mode = 'lines', line = list(color = "000066")) %>%
+        layout(yaxis = list(autorange = "reversed"))
+
+fig <- subplot(a, b, nrows =2 ) %>% 
+  layout(title = list(text = "Aflalo"), 
+         xaxis = list(gridcolor = 'lightgray'), 
+         yaxis = list(gridcolor = 'lightgray')) 
+fig
+
+```

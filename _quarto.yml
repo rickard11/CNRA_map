@@ -16,7 +16,17 @@ website:
         text: TNC Sites
       - href: Randall.qmd
         text: Randall
-
+      - href: Santa_Clara_River.qmd
+        text: Santa Clara River
+      - href: Las_Piletas.qmd
+        text: Las Piletas
+      - href: Dangermond.qmd
+        text: Dangermond
+      - href: Parks_Creek.qmd
+        text: Parks Creek
+      - href: Santa_Cruz_Island.qmd
+        text: Santa Cruz Island
+        
 format:
   html:
     theme:
