@@ -21,7 +21,7 @@ hourly_data<-hansonwell
 daily_data<-hansonrain
 
 daily_means <- hourly_data %>%
-  mutate(date = as.Date(Date.and.Time)) %>% # Extract the date part
+  mutate(Date = as.Date(Date.and.Time)) %>% # Extract the date part
   group_by(Date) %>%
   summarize(mean_value = mean(ft..below.ground., na.rm = TRUE)) %>%
   ungroup()
