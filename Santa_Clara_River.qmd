@@ -11,7 +11,7 @@ Place holder content is here
 ```{r,hanson}
 library(plotly)
 library (dplyr)
-hansonrain<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Hanson Retired Rain Gauge Rain Gauge 20231102-20251201.csv")
+hansonrain<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Aflalo Rain Gauge Rain Gauge 20231102-20251201.csv")
 hansonwell<-read.csv("data/12-1-2025 CalGro Download/Santa Clara River Hanson Retired Well Well 20231102-20251201.csv")
 hansonwell$Date.and.Time<-as.POSIXct(hansonwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
 hansonwell$Date<-format(hansonwell$Date.and.Time,format="%Y-%m-%d")
@@ -22,23 +22,31 @@ hansonall<-merge(hansonwell,hansonrain,by="Date",all.x=TRUE,all.y=TRUE)
 hourly_data<-hansonwell
 daily_data<-hansonrain
 
-# Prepare data for faceting
-hourly_data_long <- hourly_data %>%
-  mutate(Date.and.Time = as.POSIXct(Date.and.Time),variable = "Water Depth", value = ft..below.ground.) %>%
-  select(Date.and.Time, variable, value)
+daily_means <- hourly_data %>%
+  mutate(date = as.Date(Date.and.Time)) %>% # Extract the date part
+  group_by(Date) %>%
+  summarize(mean_value = mean(ft..below.ground., na.rm = TRUE)) %>%
+  ungroup()
 
-daily_data_long <- daily_data %>%
-  mutate(Date.and.Time = as.POSIXct(Date), variable = "Rainfall", value = Rain..in.) %>%
-  select(Date.and.Time, variable, value)
+daily_data$Date<-as.Date(daily_data$Date,format="%Y-%m-%d (%A)")
 
-### Make 2 seperate interactive plots with the same scales
-p<-ggplot(data = hourly_data_long, aes(x = Date.and.Time)) +
-  geom_line(color = "navy",aes(y=value))+scale_y_reverse()+theme_bw()
+### Make 2 seperate interactive plots with the same scale
 
-q<-ggplot(data = daily_data_long, aes(x = Date.and.Time)) +
-  geom_col(color = "navy",aes(y=value))+scale_y_reverse()+theme_bw()+xlab("")
+a<-plot_ly(data= daily_data, x = daily_data$Date, 
+        y = daily_data$Rain..in., type = 'bar',marker =list(color="99CCff")) %>%
+        layout(yaxis = list(autorange = "reversed"))
 
 
+b<-plot_ly(data = hourly_data, x = hourly_data$Date.and.Time, y = hourly_data$ft..below.ground., name = 'Hourly', type = 'scatter', mode = 'lines',line = list(color = "grey"),opacity = 0.3) %>% 
+  add_trace(data = daily_means, x = daily_means$Date, y = daily_means$mean_value, mode = 'lines',line = list(color = "black"),opacity = 0.9)  %>% 
+  layout(yaxis = list(autorange = "reversed"))
+
+
+fig <- subplot(a, b, nrows =2 ) %>% 
+  layout(title = list(text = "Hanson"), 
+         xaxis = list(gridcolor = 'lightgray'), 
+         yaxis = list(gridcolor = 'lightgray')) 
+fig
 ```
 
 
@@ -59,12 +67,12 @@ daily_means <- hourly_data %>%
   summarize(mean_value = mean(ft..below.ground., na.rm = TRUE)) %>%
   ungroup()
 
-#daily_data$Date<-as.Date(daily_data$Date,format="%Y-%m-%d (%A)")
+daily_data$Date<-as.Date(daily_data$Date,format="%Y-%m-%d (%A)")
 
 ### Make 2 seperate interactive plots with the same scale
 
-a<-plot_ly(data= daily_data_long, x = daily_data_long$Date.and.Time, 
-        y = daily_data_long$value, type = 'bar',marker =list(color="99CCff")) %>%
+a<-plot_ly(data= daily_data, x = daily_data$Date, 
+        y = daily_data$Rain..in., type = 'bar',marker =list(color="99CCff")) %>%
         layout(yaxis = list(autorange = "reversed"))
 
 
