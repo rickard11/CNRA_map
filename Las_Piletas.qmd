@@ -5,3 +5,117 @@ format:
   dashboard:
     orientation: columns
 ---
+
+## Column {width="100%"}
+
+### Row {height="33%"}
+
+```{r,Cooper}
+library(plotly)
+library (dplyr)
+Cooperrain<-read.csv("data/12-1-2025 CalGro Download/Las Piletas Cooper plus Rain Gauge Rain Gauge 20241101-20251216.csv")
+Cooperwell<-read.csv("data/12-1-2025 CalGro Download/Cooper plus Well 20231102-20251201.csv")
+Cooperwell$Date.and.Time<-as.POSIXct(Cooperwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+
+hourly_data<-Cooperwell
+daily_data<-Cooperrain
+
+daily_means <- hourly_data %>%
+  mutate(Date = as.Date(Date.and.Time)) %>% # Extract the date part
+  group_by(Date) %>%
+  summarize(mean_value = mean(ft..below.ground., na.rm = TRUE)) %>%
+  ungroup()
+
+daily_data$Date<-as.Date(daily_data$Date,format="%Y-%m-%d (%A)")
+
+### Make 2 seperate interactive plots with the same scale
+
+a<-plot_ly(data= daily_data, x = daily_data$Date, 
+        y = daily_data$Rain..in., type = 'bar',marker =list(color="99CCff")) %>%
+        layout(yaxis = list(autorange = "reversed"))
+
+b<-plot_ly(data = hourly_data, x = hourly_data$Date.and.Time, y = hourly_data$ft..below.ground., name = 'Hourly', type = 'scatter', mode = 'lines',line = list(color = "grey"),opacity = 0.3) %>% 
+  add_trace(data = daily_means, x = daily_means$Date, y = daily_means$mean_value, mode = 'lines',line = list(color = "black"),opacity = 0.9)  %>% 
+  layout(yaxis = list(autorange = "reversed"))
+
+fig <- subplot(a, b, nrows =2 ) %>% 
+  layout(title = list(text = "Cooper"), 
+         xaxis = list(gridcolor = 'lightgray'), 
+         yaxis = list(gridcolor = 'lightgray')) 
+fig
+```
+
+### Row {height="33%"}
+
+```{r,NECorner}
+library(plotly)
+library (dplyr)
+NECornerrain<-read.csv("data/12-1-2025 CalGro Download/Las Piletas Cooper plus Rain Gauge Rain Gauge 20241101-20251216.csv")
+NECornerwell<-read.csv("data/12-1-2025 CalGro Download/Las Piletas NE Corner Well 20231102-20251201.csv")
+NECornerwell$Date.and.Time<-as.POSIXct(NECornerwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+
+hourly_data<-NECornerwell
+daily_data<-NECornerrain
+
+daily_means <- hourly_data %>%
+  mutate(Date = as.Date(Date.and.Time)) %>% # Extract the date part
+  group_by(Date) %>%
+  summarize(mean_value = mean(ft..below.ground., na.rm = TRUE)) %>%
+  ungroup()
+
+daily_data$Date<-as.Date(daily_data$Date,format="%Y-%m-%d (%A)")
+
+### Make 2 seperate interactive plots with the same scale
+
+a<-plot_ly(data= daily_data, x = daily_data$Date, 
+        y = daily_data$Rain..in., type = 'bar',marker =list(color="99CCff")) %>%
+        layout(yaxis = list(autorange = "reversed"))
+
+b<-plot_ly(data = hourly_data, x = hourly_data$Date.and.Time, y = hourly_data$ft..below.ground., name = 'Hourly', type = 'scatter', mode = 'lines',line = list(color = "grey"),opacity = 0.3) %>% 
+  add_trace(data = daily_means, x = daily_means$Date, y = daily_means$mean_value, mode = 'lines',line = list(color = "black"),opacity = 0.9)  %>% 
+  layout(yaxis = list(autorange = "reversed"))
+
+fig <- subplot(a, b, nrows =2 ) %>% 
+  layout(title = list(text = "NE Corner"), 
+         xaxis = list(gridcolor = 'lightgray'), 
+         yaxis = list(gridcolor = 'lightgray')) 
+fig
+```
+
+### Row {height="33%"}
+
+```{r,Windmill}
+library(plotly)
+library (dplyr)
+Windmillrain<-read.csv("data/12-1-2025 CalGro Download/Las Piletas Cooper plus Rain Gauge Rain Gauge 20241101-20251216.csv")
+Windmillwell<-read.csv("data/12-1-2025 CalGro Download/Las Piletas Windmill Well 20231102-20251201.csv")
+Windmillwell$Date.and.Time<-as.POSIXct(Windmillwell$Date.and.Time,format="%Y-%m-%d %H:%M:%S")
+
+hourly_data<-Windmillwell
+hourly_data<-hourly_data[hourly_data$Date.and.Time>="2025-02-27",]
+daily_data<-Windmillrain
+
+daily_means <- hourly_data %>%
+  mutate(Date = as.Date(Date.and.Time)) %>% # Extract the date part
+  group_by(Date) %>%
+  summarize(mean_value = mean(ft..below.ground., na.rm = TRUE)) %>%
+  ungroup()
+
+daily_data$Date<-as.Date(daily_data$Date,format="%Y-%m-%d (%A)")
+
+### Make 2 seperate interactive plots with the same scale
+
+a<-plot_ly(data= daily_data, x = daily_data$Date, 
+        y = daily_data$Rain..in., type = 'bar',marker =list(color="99CCff")) %>%
+        layout(yaxis = list(autorange = "reversed"))
+
+b<-plot_ly(data = hourly_data, x = hourly_data$Date.and.Time, y = hourly_data$ft..below.ground., name = 'Hourly', type = 'scatter', mode = 'lines',line = list(color = "grey"),opacity = 0.3) %>% 
+  add_trace(data = daily_means, x = daily_means$Date, y = daily_means$mean_value, mode = 'lines',line = list(color = "black"),opacity = 0.9)  %>% 
+  layout(yaxis = list(autorange = "reversed"))
+
+fig <- subplot(a, b, nrows =2 ) %>% 
+  layout(title = list(text = "Windmill"), 
+         xaxis = list(gridcolor = 'lightgray'), 
+         yaxis = list(gridcolor = 'lightgray')) 
+fig
+```
