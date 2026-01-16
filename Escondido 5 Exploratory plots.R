@@ -219,19 +219,20 @@ rain_adj$Depth_Difference<-rain_adj$Depth_Difference * -1
 tail(rain_adj)
 rain_adj
 
+
+coeff <- 0.5
 p2 <- ggplot(data=rain_adj, aes(x=DayofYear, y=cumulative_rain)) +
   geom_line(alpha=0.7,aes(color=WaterYear),linewidth=3)+theme_bw()+
-  geom_line(aes(y=Depth_Difference,color=WaterYear),linewidth = 1)
-p2
-
+  geom_line(aes(y=Depth_Difference/coeff,color=WaterYear),linewidth = 1)+
+  scale_y_continuous(name = "Cumulative Rainfall",
+    sec.axis = sec_axis(~.*coeff, name="Change in Depth to Groundwater")
+  )
 
 p3<- ggplot(data=rain_adj,aes(x=cumulative_rain))+
   geom_point(aes(y=Depth_Difference,color=WaterYear))
 p3
 
-
-
-rain_adj
+#write.csv(rain_adj,"data/Escondido5_summary_adj.csv")
 #######################################
 ##try 7 day rolling sum
 # Calculate the 7-day rolling sum
@@ -250,18 +251,61 @@ rain_adj <- rain_adj %>%
 rain_adj$Roll_7D_SumRain <- format(rain_adj$Roll_7D_SumRain, scientific = FALSE)
 rain_adj$Roll_7D_SumRain<-as.numeric(rain_adj$Roll_7D_SumRain)
 rain_adj$Roll_7D_SumRain <- round(rain_adj$Roll_7D_SumRain, 2)
-# View the result
-
 ##14 days for both works beast now
-
 ggplot(data=rain_adj,aes(x=Roll_7D_SumRain))+
   geom_point(aes(y=day7_diff_gw,color=WaterYear))
 
+##sum non 0 to non zero rain day- storm specific to reduce noise
+precip_runs <- rle(rain_adj$Rain_in > 0.04)
+rain_test<-rain_adj
 
+# 3. Create a unique storm ID for each rainy period
+# Initialize a vector for storm IDs, defaulting to 0 for no storm
+rain_test$Storm_ID <- 0
 
-ggplot(data=rain_adj,aes(x=Roll_7D_SumRain))+
-  geom_point(aes(y=day7_diff_gw,fill=DayofYear))+ylim(-1,2.5)
+# Generate IDs only for the runs where precipitation was TRUE (rle$values)
+# rep() is used to repeat the sequence of IDs by the length of each run
+storm_ids <- rep(1:sum(precip_runs$values), times = precip_runs$lengths[precip_runs$values])
 
+# Assign the generated IDs to the corresponding rainy days in the data frame
+rain_test$Storm_ID[rain_test$Rain_in > 0.04] <- storm_ids
 
+storms <- rain_test %>%
+  arrange(Date) %>%
+  mutate(
+    storm_expanded = Storm_ID,
+    storm_expanded = if_else(
+      storm_expanded == 0 &
+        lag(Storm_ID) > 0 &
+        Date - lag(Date) == 1,
+      lag(Storm_ID),
+      storm_expanded
+    ),
+    storm_expanded = if_else(
+      storm_expanded == 0 &
+        lead(Storm_ID) > 0 &
+        lead(Date) - Date == 1,
+      lead(Storm_ID),
+      storm_expanded
+    )
+  )
 
-##need some sort of weight on the data closest to the point.
+storms<-storms[storms$storm_expanded!=0,]
+
+storm_summary <- storms %>%
+  filter(!is.na(storm_expanded)) %>%      # drop non-storm days
+  arrange(Date) %>%
+  group_by(storm_expanded) %>%
+  summarise(
+    start_date = first(Date),
+    end_date   = last(Date),
+    total_rain = sum(Rain_in, na.rm = TRUE),
+    rain_int = max(Rain_in),
+    start_depth = first(Corrected.mean.ft.below.ground),
+    end_depth   = last(Corrected.mean.ft.below.ground),
+    diff_depth = start_depth - end_depth,
+    .groups = "drop"
+  )
+
+ggplot(data=storm_summary,aes(x=total_rain))+
+  geom_point(aes(y=diff_depth))+ylim(-0.5,1.5)
